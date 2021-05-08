@@ -1,0 +1,20 @@
+table.table thead th{
+    text-align: center;
+}
+
+.select2-parent .select2-container--default .select2-selection--single {
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+}
+
+.select2-parent .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 20%;
+}
+
+.select2-parent .select2-container--default .select2-selection--single .select2-selection__clear {
+    margin-top: 0.6%;
+}
+
+.nav-sidebar>.nav-item.menu-open>.nav-link {
+    /*background-color: #007bff !important;*/
+}
