@@ -1,10 +1,16 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{asset("/public/admin-lte/dist/img/AdminLTELogo.png")}}" alt="AdminLTE Logo"
-             class="brand-image img-circle elevation-3"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">{{env('APP_NAME')}}</span>
+    <a href="{{route('dashboard')}}" class="brand-link">
+        @if(!$siteSetting->logo)
+            <img src="{{asset("/public/admin-lte/dist/img/AdminLTELogo.png")}}" alt="Company Logo"
+                 class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+        @else
+            <img src="{{asset($siteSetting->logo)}}" alt="Company Logo"
+                 class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+        @endif
+        <span class="brand-text font-weight-light">{{ucwords($siteSetting->site_title ?? '')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,8 +40,15 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+
+                <li class="nav-item">
+                    <a href="{{route('dashboard')}}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
 
                 @if(!empty($aclList[6][1]))
                     <li class="nav-item has-treeview {{ ($routeName == 'user.index' || $routeName == 'user.create' || $routeName == 'user.edit') ? 'menu-open' : '' }}">
@@ -102,8 +115,8 @@
                 </li>
                 @endif
 
-                @if(!empty($aclList[4][1]) || !empty($aclList[5][1]))
-                <li class="nav-item has-treeview {{ ($routeName == 'activity.index' || $routeName == 'activity.create' || $routeName == 'activity.edit' || $routeName == 'module.index' || $routeName == 'module.create'|| $routeName == 'module.edit') ? 'menu-open' : '' }}">
+                @if(!empty($aclList[4][1]) || !empty($aclList[5][1]) || !empty($aclList[10][3]))
+                <li class="nav-item has-treeview {{ ($routeName == 'activity.index' || $routeName == 'activity.create' || $routeName == 'activity.edit' || $routeName == 'module.index' || $routeName == 'module.create'|| $routeName == 'module.edit' || $routeName == 'site.setting.edit') ? 'menu-open' : '' }}">
                     <a href="#"
                        class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
@@ -128,6 +141,15 @@
                                class="nav-link {{ ($routeName == 'activity.index' || $routeName == 'activity.create'|| $routeName == 'activity.edit') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Activity Management</p>
+                            </a>
+                        </li>
+                                @endif
+                            @if(!empty($aclLIst[10][3]))
+                        <li class="nav-item">
+                            <a href="{{route("site.setting.edit")}}"
+                               class="nav-link {{ ($routeName == 'site.setting.edit') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Site Setting</p>
                             </a>
                         </li>
                                 @endif

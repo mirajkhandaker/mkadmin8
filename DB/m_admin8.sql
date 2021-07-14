@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2021 at 05:53 PM
+-- Generation Time: Jul 14, 2021 at 11:10 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -94,7 +94,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2020_01_17_041749_create_module_to_roles_table', 1),
 (29, '2020_01_17_041946_create_module_to_users_table', 1),
 (30, '2020_01_17_042141_create_roles_table', 1),
-(31, '2020_01_18_111739_add_created_by_to_roles', 1);
+(31, '2020_01_18_111739_add_created_by_to_roles', 1),
+(41, '2021_06_01_171209_create_site_settings_table', 2);
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,8 @@ INSERT INTO `modules` (`id`, `name`, `description`, `status`, `deleted_at`, `cre
 (3, 'User Access Control', NULL, 1, NULL, 1, 1, '2020-01-24 12:54:59', '2020-01-24 12:54:59'),
 (4, 'Module Management', NULL, 1, NULL, 1, 1, '2020-01-24 12:55:37', '2020-01-24 12:55:37'),
 (5, 'Activity Management', NULL, 1, NULL, 1, 1, '2020-01-24 12:55:58', '2020-01-24 12:55:58'),
-(6, 'Admin Panel User', NULL, 1, NULL, 1, 1, '2020-01-24 12:58:53', '2020-01-24 12:58:53');
+(6, 'Admin Panel User', NULL, 1, NULL, 1, 1, '2020-01-24 12:58:53', '2020-01-24 12:58:53'),
+(10, 'Site Setting', NULL, 1, NULL, 1, 1, '2021-07-14 03:08:07', '2021-07-14 03:08:07');
 
 -- --------------------------------------------------------
 
@@ -174,7 +176,8 @@ INSERT INTO `module_to_activities` (`id`, `module_id`, `activity_id`, `status`, 
 (50, 1, 2, 1, NULL, 1, 1, '2020-12-05 09:05:04', '2020-12-05 09:05:04'),
 (51, 1, 4, 1, NULL, 1, 1, '2020-12-05 09:05:04', '2020-12-05 09:05:04'),
 (52, 1, 3, 1, NULL, 1, 1, '2020-12-05 09:05:04', '2020-12-05 09:05:04'),
-(53, 1, 1, 1, NULL, 1, 1, '2020-12-05 09:05:04', '2020-12-05 09:05:04');
+(53, 1, 1, 1, NULL, 1, 1, '2020-12-05 09:05:04', '2020-12-05 09:05:04'),
+(54, 10, 3, 1, NULL, 1, 1, '2021-07-14 03:08:07', '2021-07-14 03:08:07');
 
 -- --------------------------------------------------------
 
@@ -200,32 +203,6 @@ CREATE TABLE `module_to_roles` (
 --
 
 INSERT INTO `module_to_roles` (`id`, `module_id`, `role_id`, `activity_id`, `status`, `deleted_at`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(238, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(239, 1, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(240, 1, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(241, 1, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(242, 2, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(243, 2, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(244, 2, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(245, 2, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(246, 3, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(247, 3, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(248, 3, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(249, 3, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(250, 4, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(251, 4, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(252, 4, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(253, 4, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(254, 5, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(255, 5, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(256, 5, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(257, 5, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(258, 6, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(259, 6, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(260, 6, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(261, 6, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(262, 6, 1, 5, 1, NULL, NULL, NULL, NULL, NULL),
-(263, 6, 1, 6, 1, NULL, NULL, NULL, NULL, NULL),
 (264, 1, 2, 1, 1, NULL, NULL, NULL, NULL, NULL),
 (265, 1, 2, 2, 1, NULL, NULL, NULL, NULL, NULL),
 (266, 1, 2, 3, 1, NULL, NULL, NULL, NULL, NULL),
@@ -249,7 +226,34 @@ INSERT INTO `module_to_roles` (`id`, `module_id`, `role_id`, `activity_id`, `sta
 (284, 6, 2, 1, 1, NULL, NULL, NULL, NULL, NULL),
 (285, 6, 2, 2, 1, NULL, NULL, NULL, NULL, NULL),
 (286, 6, 2, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(287, 6, 2, 4, 1, NULL, NULL, NULL, NULL, NULL);
+(287, 6, 2, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(288, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(289, 1, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(290, 1, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(291, 1, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(292, 2, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(293, 2, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(294, 2, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(295, 2, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(296, 3, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(297, 3, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(298, 3, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(299, 3, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(300, 4, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(301, 4, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(302, 4, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(303, 4, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(304, 5, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(305, 5, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(306, 5, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(307, 5, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(308, 6, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(309, 6, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(310, 6, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(311, 6, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(312, 6, 1, 5, 1, NULL, NULL, NULL, NULL, NULL),
+(313, 6, 1, 6, 1, NULL, NULL, NULL, NULL, NULL),
+(314, 10, 1, 3, 1, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -327,30 +331,33 @@ INSERT INTO `module_to_users` (`id`, `module_id`, `user_id`, `activity_id`, `sta
 (366, 6, 5, 2, 1, NULL, NULL, NULL, NULL, NULL),
 (367, 6, 5, 3, 1, NULL, NULL, NULL, NULL, NULL),
 (368, 6, 5, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(411, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(412, 1, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(413, 1, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(414, 1, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(415, 2, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(416, 2, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(417, 2, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(418, 2, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(419, 3, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(420, 3, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(421, 3, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(422, 3, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(423, 4, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(424, 4, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(425, 4, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(426, 4, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(427, 5, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(428, 5, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(429, 5, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(430, 5, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
-(431, 6, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(432, 6, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(433, 6, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
-(434, 6, 1, 4, 1, NULL, NULL, NULL, NULL, NULL);
+(435, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(436, 1, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(437, 1, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(438, 1, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(439, 2, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(440, 2, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(441, 2, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(442, 2, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(443, 3, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(444, 3, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(445, 3, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(446, 3, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(447, 4, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(448, 4, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(449, 4, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(450, 4, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(451, 5, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(452, 5, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(453, 5, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(454, 5, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(455, 6, 1, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(456, 6, 1, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(457, 6, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(458, 6, 1, 4, 1, NULL, NULL, NULL, NULL, NULL),
+(459, 6, 1, 5, 1, NULL, NULL, NULL, NULL, NULL),
+(460, 6, 1, 6, 1, NULL, NULL, NULL, NULL, NULL),
+(461, 10, 1, 3, 1, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -395,6 +402,37 @@ INSERT INTO `roles` (`id`, `name`, `info`, `status`, `deleted_at`, `updated_by`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `site_settings`
+--
+
+CREATE TABLE `site_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `logo` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_no` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_title` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(765) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keyword` varchar(765) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `copy_right` varchar(765) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alert_quantity` int(11) NOT NULL DEFAULT 5,
+  `display_unit` int(11) DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `site_settings`
+--
+
+INSERT INTO `site_settings` (`id`, `logo`, `icon`, `email`, `contact_no`, `site_title`, `meta_description`, `meta_keyword`, `copy_right`, `alert_quantity`, `display_unit`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'public/upload/site-setting/otPhjJpkiC2b4jAZABYy.png', 'public/upload/site-setting/821lt8b2T0V7ivyHno7b.png', 'thakurlemon@gmail.com', '01719287734', 'Inventory', 'Web Embed', 'Inventory', 'Inventory', 15000, 1, 1, 1, '2021-06-02 00:26:39', '2021-06-24 23:55:17');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -422,7 +460,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `email_verified_at`, `contact_no`, `photo`, `password`, `lastLoginTime`, `status`, `deleted_at`, `remember_token`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin', 'admin@email.com', NULL, '01682234164', 'public/upload/portfolio-pic/f0pFrHvIHOApjaNZLlKi.jpg', '$2y$10$m4ZSPJRaz3C7chseDTpqCub3ZeN4Pn4IRfXFiifnbYN21hkP.4hbm', '2021-05-08 15:07:15', 1, NULL, 'RU3faioaqTW49FZQHE7dgHe9Fb4g3LUlN14lQUxqB2CAFlbLVL7oILjc9Bns', 1, 1, '2020-01-18 10:14:02', '2021-05-08 09:10:10'),
+(1, 1, 'admin', 'admin@email.com', NULL, '01682234164', 'public/upload/portfolio-pic/f0pFrHvIHOApjaNZLlKi.jpg', '$2y$10$m4ZSPJRaz3C7chseDTpqCub3ZeN4Pn4IRfXFiifnbYN21hkP.4hbm', '2021-07-14 09:07:05', 1, NULL, 'i4XVxXFDrutMYh3a1TCUZ4yBuhp9s4OJEZZ8QI48LkdIaPT0kbQMCVc20YJB', 1, 1, '2020-01-18 10:14:02', '2021-07-14 03:07:05'),
 (2, 1, 'Myles Key', 'jymyjopuny@mailinator.com', NULL, '123456', 'public/upload/rofile-pic/Vty0kqzBV9o3coKVIyqI.jpg', '$2y$10$lJHuiDyxiw/yq/.bfz01BeygTc9Tl0mZbAM0JS7NADJlVjXmBSsDK', NULL, 1, '2020-03-02 15:06:00', NULL, 1, 1, '2020-01-18 10:33:52', '2020-03-02 15:06:00'),
 (3, 2, 'Phelan Brown', 'fynojewu@mailinator.com', NULL, '1465', 'public/upload/rofile-pic/IfhDPL9wVq1IPh6J4d4w.png', '$2y$10$BvWoKwT6Toe1WgiVuxutxufuaqhUb1VXiZKaRYsSyK6TQz3NcFVge', NULL, 1, '2020-01-24 14:39:51', NULL, 1, 1, '2020-01-18 10:37:14', '2020-01-24 14:39:51'),
 (4, 2, 'Charlotte Villarreal', 'cusesohyko@mailinator.com', NULL, '12456', 'public/upload/rofile-pic/bcE7Fewm45VV3WtuoL0v.png', '$2y$10$2aF8MBYraBpAzxw/ye2bXuKieJp6FoBuVQBHL6YHbSN1CIouTQf9C', NULL, 1, '2020-03-02 15:06:04', NULL, 1, 1, '2020-01-18 10:48:36', '2020-03-02 15:06:04'),
@@ -489,6 +527,12 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `site_settings`
+--
+ALTER TABLE `site_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -516,37 +560,43 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `module_to_activities`
 --
 ALTER TABLE `module_to_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `module_to_roles`
 --
 ALTER TABLE `module_to_roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=315;
 
 --
 -- AUTO_INCREMENT for table `module_to_users`
 --
 ALTER TABLE `module_to_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=435;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `site_settings`
+--
+ALTER TABLE `site_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

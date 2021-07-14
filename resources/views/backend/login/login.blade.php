@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Log in | {{env('APP_NAME')}}</title>
+    <title>Log in | {{ucwords($siteSetting->site_title ?? 'APP_NAME')}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{$siteSetting->icon}}" type="image/gif">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('/public/admin-lte/dist/css/adminlte.min.css')}}">
-    <link rel="stylesheet" href="{{asset("/public/admin-lte/plugins/sweetalert2/sweetalert2.min.css")}}">
+    <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/sweetalert2/sweetalert2.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -23,7 +24,7 @@
     <script src="{{asset('/plugin/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('/plugin/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('/plugin/admin-lte/dist/js/adminlte.min.js')}}"></script>
-    <script src="{{asset("/public/admin-lte/plugins/sweetalert2/sweetalert2.all.min.js")}}"></script>
+    <script src="{{asset('/public/admin-lte/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
 
 </head>
 <body class="hold-transition login-page">
@@ -42,7 +43,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>{{env('APP_NAME')}}</b></a>
+        <a href="#"><b>{{ucwords($siteSetting->site_title ?? '')}}</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -85,6 +86,16 @@
                     <!-- /.col -->
                 </div>
             </form>
+
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <div  style="border-top: 1px solid rgba(0,0,0,.1);">
+                        <small>Copyright ©️ 2021 Web Embed. All rights reserved.</small><br>
+                        <small><a href="https://itclanbd.com" target="_blank">Design and Develop by ITclan BD</a></small>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.login-card-body -->
     </div>

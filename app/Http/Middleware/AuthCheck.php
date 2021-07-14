@@ -2,7 +2,7 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-class authCeck {
+class AuthCheck {
 
 	/**
 	 * Handle an incoming request.
