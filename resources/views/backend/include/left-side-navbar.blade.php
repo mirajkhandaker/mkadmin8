@@ -144,7 +144,7 @@
                             </a>
                         </li>
                                 @endif
-                            @if(!empty($aclLIst[10][3]))
+                            @if(!empty($aclList[10][3]))
                         <li class="nav-item">
                             <a href="{{route("site.setting.edit")}}"
                                class="nav-link {{ ($routeName == 'site.setting.edit') ? 'active' : '' }}">

@@ -9,22 +9,20 @@
     <link rel="icon" href="{{$siteSetting->icon}}" type="image/gif">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{asset('/admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('/public/admin-lte/dist/css/adminlte.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/public/admin-lte/plugins/sweetalert2/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/admin-lte/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/admin-lte/plugins/sweetalert2/sweetalert2.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <!-- jQuery -->
-    <script src="{{asset('/plugin/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('/plugin/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('/plugin/admin-lte/dist/js/adminlte.min.js')}}"></script>
-    <script src="{{asset('/public/admin-lte/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+    <script src="{{asset('/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/admin-lte/dist/js/adminlte.min.js')}}"></script>
+    <script src="{{asset('/admin-lte/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
 
 </head>
 <body class="hold-transition login-page">
