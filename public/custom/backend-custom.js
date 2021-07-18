@@ -5,7 +5,7 @@ $(".cancel").click(function () {
 
 // Delete Confirm
 $(document).ready(function() {
-    $('.delete').on('click', function (e) {
+    $(document).on('click', '.delete', function (e) {
         e.preventDefault();
         var form = $(this).parents('form');
         Swal.fire({
@@ -36,3 +36,5 @@ $(document).ready(function() {
         image.src = URL.createObjectURL(event.target.files[0]);
     });
 });
+
+

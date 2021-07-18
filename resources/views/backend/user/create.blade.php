@@ -68,7 +68,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no">Contact No<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control {{$errors->has("contact_no") ? "is-invalid":""}}" id="contact_no" name="contact_no" placeholder="Enter User Contact No" value="{{old("contact_no")}}">
+                                                <input type="text" max="15" class="form-control {{$errors->has("contact_no") ? "is-invalid":""}}" id="contact_no" name="contact_no" placeholder="Enter User Contact No" value="{{old("contact_no")}}">
                                                 <span class="text-danger"> {{$errors->has("contact_no") ? $errors->first("contact_no") : ""}} </span>
                                             </div>
                                         </div>

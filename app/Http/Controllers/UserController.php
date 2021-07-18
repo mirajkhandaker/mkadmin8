@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -18,10 +19,28 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { OwnLibrary::validateAccess($this->moduleId,1);
-        $users = User::with(['role:id,name','creator:id,name','updator:id,name'])->orderBy('name')->paginate(20);
-        return view('backend.user.index',compact('users'));
+    public function index(Request $request)
+    {
+        OwnLibrary::validateAccess($this->moduleId,1);
+
+        if($request->ajax()){
+            $name = $request->name;
+
+            $users = User::with(['role:id,name','creator:id,name','updator:id,name'])
+                ->orderBy('name');
+
+            if (!empty($name)){
+                $users = $users->where("name","LIKE","%$name%");
+            }
+
+
+            return DataTables::of($users)
+                ->addColumn('actions', 'backend.user.action')
+                ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('backend.user.index');
     }
 
     /**
@@ -49,7 +68,7 @@ class UserController extends Controller
             'role_id' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'contact_no' => 'required|unique:users',
+            'contact_no' => 'required|unique:users|max:15',
             'password' => 'required|min:5',
             'confirm_password' => 'required|same:password|min:5',
             'photo' => 'image'

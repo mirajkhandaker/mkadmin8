@@ -18,3 +18,7 @@ table.table thead th{
 .nav-sidebar>.nav-item.menu-open>.nav-link {
     /*background-color: #007bff !important;*/
 }
+
+div.dt-buttons {
+    float: right;
+}

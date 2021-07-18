@@ -35,8 +35,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script src="{{asset("/admin-lte/plugins/jquery/jquery.min.js")}}"></script>
     <script src="{{asset("/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
-    <script src="{{asset("/admin-lte/dist/js/adminlte.min.js")}}"></script>
     <script src="{{asset("/admin-lte/plugins/select2/js/select2.full.min.js")}}"></script>
+    <script src="{{asset("/admin-lte/plugins/sweetalert2/sweetalert2.min.js")}}"></script>
+    <script src="{{asset("/admin-lte/dist/js/adminlte.min.js")}}"></script>
     <!-- data table js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
