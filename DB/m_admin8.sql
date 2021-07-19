@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 11:10 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Jul 19, 2021 at 06:05 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `m_admin7`
+-- Database: `m_admin8`
 --
 
 -- --------------------------------------------------------
@@ -428,7 +428,7 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `logo`, `icon`, `email`, `contact_no`, `site_title`, `meta_description`, `meta_keyword`, `copy_right`, `alert_quantity`, `display_unit`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'public/upload/site-setting/otPhjJpkiC2b4jAZABYy.png', 'public/upload/site-setting/821lt8b2T0V7ivyHno7b.png', 'thakurlemon@gmail.com', '01719287734', 'Inventory', 'Web Embed', 'Inventory', 'Inventory', 15000, 1, 1, 1, '2021-06-02 00:26:39', '2021-06-24 23:55:17');
+(1, 'public/upload/site-setting/oN5m0foVCDmdMpP7Zhdq.png', 'public/upload/site-setting/pscb8cQG6OXhTBej6wny.png', 'thakurlemon@gmail.com', '01719287734', 'Contest', 'Web Embed', 'Inventory', 'Contest', 15000, 1, 1, 1, '2021-06-02 00:26:39', '2021-07-18 21:59:00');
 
 -- --------------------------------------------------------
 
@@ -460,13 +460,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `email_verified_at`, `contact_no`, `photo`, `password`, `lastLoginTime`, `status`, `deleted_at`, `remember_token`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin', 'admin@email.com', NULL, '01682234164', 'public/upload/portfolio-pic/f0pFrHvIHOApjaNZLlKi.jpg', '$2y$10$m4ZSPJRaz3C7chseDTpqCub3ZeN4Pn4IRfXFiifnbYN21hkP.4hbm', '2021-07-14 09:07:05', 1, NULL, 'i4XVxXFDrutMYh3a1TCUZ4yBuhp9s4OJEZZ8QI48LkdIaPT0kbQMCVc20YJB', 1, 1, '2020-01-18 10:14:02', '2021-07-14 03:07:05'),
-(2, 1, 'Myles Key', 'jymyjopuny@mailinator.com', NULL, '123456', 'public/upload/rofile-pic/Vty0kqzBV9o3coKVIyqI.jpg', '$2y$10$lJHuiDyxiw/yq/.bfz01BeygTc9Tl0mZbAM0JS7NADJlVjXmBSsDK', NULL, 1, '2020-03-02 15:06:00', NULL, 1, 1, '2020-01-18 10:33:52', '2020-03-02 15:06:00'),
-(3, 2, 'Phelan Brown', 'fynojewu@mailinator.com', NULL, '1465', 'public/upload/rofile-pic/IfhDPL9wVq1IPh6J4d4w.png', '$2y$10$BvWoKwT6Toe1WgiVuxutxufuaqhUb1VXiZKaRYsSyK6TQz3NcFVge', NULL, 1, '2020-01-24 14:39:51', NULL, 1, 1, '2020-01-18 10:37:14', '2020-01-24 14:39:51'),
-(4, 2, 'Charlotte Villarreal', 'cusesohyko@mailinator.com', NULL, '12456', 'public/upload/rofile-pic/bcE7Fewm45VV3WtuoL0v.png', '$2y$10$2aF8MBYraBpAzxw/ye2bXuKieJp6FoBuVQBHL6YHbSN1CIouTQf9C', NULL, 1, '2020-03-02 15:06:04', NULL, 1, 1, '2020-01-18 10:48:36', '2020-03-02 15:06:04'),
+(1, 1, 'admin', 'admin@email.com', NULL, '01682234164', 'public/upload/portfolio-pic/LtrmIxDiRzqTUUtjzF5k.jpg', '$2y$10$m4ZSPJRaz3C7chseDTpqCub3ZeN4Pn4IRfXFiifnbYN21hkP.4hbm', '2021-07-19 03:58:35', 1, NULL, '7YhAAiFAv3LcmcoFOLFGRThkasxUuXco3znBI9gqj9cgtWPk0eCIFvNmf5hn', 1, 1, '2020-01-18 10:14:02', '2021-07-18 22:00:16'),
+(2, 1, 'Myles Key', 'jymyjopuny@mailinator.com', NULL, '123456', 'public/upload/rofile-pic/Vty0kqzBV9o3coKVIyqI.jpg', '$2y$10$lJHuiDyxiw/yq/.bfz01BeygTc9Tl0mZbAM0JS7NADJlVjXmBSsDK', NULL, 1, NULL, NULL, 1, 1, '2020-01-18 10:33:52', '2020-03-02 15:06:00'),
+(3, 2, 'Phelan Brown', 'fynojewu@mailinator.com', NULL, '1465', 'public/upload/rofile-pic/IfhDPL9wVq1IPh6J4d4w.png', '$2y$10$BvWoKwT6Toe1WgiVuxutxufuaqhUb1VXiZKaRYsSyK6TQz3NcFVge', NULL, 1, NULL, NULL, 1, 1, '2020-01-18 10:37:14', '2020-01-24 14:39:51'),
+(4, 2, 'Charlotte Villarreal', 'cusesohyko@mailinator.com', NULL, '12456', 'public/upload/rofile-pic/bcE7Fewm45VV3WtuoL0v.png', '$2y$10$2aF8MBYraBpAzxw/ye2bXuKieJp6FoBuVQBHL6YHbSN1CIouTQf9C', NULL, 1, NULL, NULL, 1, 1, '2020-01-18 10:48:36', '2020-03-02 15:06:04'),
 (5, 2, 'miraj', 'miraj@email.com', NULL, '1465456', NULL, '$2y$10$gpyKgl1cj4Yh6qAEN/Z5ZOZ9Lkp75B.DgwLev./4CIHdGLG71m7iG', '2020-03-03 11:23:09', 1, NULL, NULL, 1, 1, '2020-03-02 15:06:56', '2020-03-03 05:23:09'),
-(6, 1, 'Juliet Harrison', 'kazyx@mailinator.com', NULL, '123456874', NULL, '$2y$10$alGTDKUcytKoLnUFYyOWmer7EoXknY1911HsMCa496lq2LYV13JDK', NULL, 1, '2020-11-23 07:55:39', NULL, 1, 1, '2020-11-23 07:53:19', '2020-11-23 07:55:39'),
-(7, 1, 'Tara Erickson', 'gobimohyja@mailinator.com', NULL, 'U146545', 'public/upload/portfolio-pic/sydBo3dqmxqmFgaRT3u3.png', '$2y$10$qgZrvHAaoziTx9EsRQKyN.RDRELo3StfBHsmTajQFOAyQ0/o/W1n2', NULL, 1, '2020-11-23 07:56:55', NULL, 1, 1, '2020-11-23 07:56:49', '2020-11-23 07:56:55');
+(6, 1, 'Juliet Harrison', 'kazyx@mailinator.com', NULL, '123456874', NULL, '$2y$10$alGTDKUcytKoLnUFYyOWmer7EoXknY1911HsMCa496lq2LYV13JDK', NULL, 1, NULL, NULL, 1, 1, '2020-11-23 07:53:19', '2020-11-23 07:55:39'),
+(7, 1, 'Tara Erickson', 'gobimohyja@mailinator.com', NULL, 'U146545', 'public/upload/portfolio-pic/mVEBox9gvoYJrzQHueww.jpg', '$2y$10$qgZrvHAaoziTx9EsRQKyN.RDRELo3StfBHsmTajQFOAyQ0/o/W1n2', NULL, 1, NULL, NULL, 1, 1, '2020-11-23 07:56:49', '2021-07-18 11:42:37'),
+(8, 1, 'Holmes Spears', 'jukilo@mailinator.com', NULL, '123456845688', NULL, '$2y$10$zgvy63DyvNHGhyBZEXSBxuT/9McN08iDefme0G3BJongc0BcXM/vS', NULL, 1, NULL, NULL, 1, 1, '2021-07-17 21:14:49', '2021-07-17 21:14:49'),
+(9, 2, 'Jeremy Steele', 'tisis@mailinator.com', NULL, 'Vel eveniet', NULL, '$2y$10$tRWRy4.SgeLTyMyAYvWIduDRREcLuGS6DjIo/xMqjssX48ZucUNTm', NULL, 1, NULL, NULL, 1, 1, '2021-07-17 21:17:27', '2021-07-17 21:17:27'),
+(10, 2, 'Catherine Palmer', 'bunafefo@mailinator.com', NULL, 'Quo non', NULL, '$2y$10$0kox7J5iVhHErhPW6ZaMSumTwkad7v584oJnBh0CKgi3wsns/M6qK', NULL, 1, NULL, NULL, 1, 1, '2021-07-17 21:17:43', '2021-07-17 21:17:43'),
+(11, 3, 'Hashim Velez', 'ligexusenu@mailinator.com', NULL, 'Expedit', 'public/upload/portfolio-pic/qzd6rhhgB2jEnucwvnc7.jpg', '$2y$10$gmCO4ZZw0B9AbvYmDgMWJOPlVMqv3l2TPhn41cuZ03dBJZ0j5llAm', NULL, 1, NULL, NULL, 1, 1, '2021-07-18 08:58:57', '2021-07-18 08:58:57');
 
 --
 -- Indexes for dumped tables
@@ -602,7 +606,7 @@ ALTER TABLE `site_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
