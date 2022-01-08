@@ -100,16 +100,16 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 img-parent">
                                             <label>
                                                 Upload Profile Image
                                             </label>
-                                            <p><input name="photo" type="file"  accept="image/*" name="image" class="image" id="image" style="display: none;"></p>
+                                            <p><input name="photo" type="file"  accept="image/*" class="image" id="image" style="display: none;"></p>
                                             <p><label for="image" style="cursor: pointer;">
-                                                    @if($user->photo)
-                                                        <img id="output" src="{{asset($user->photo)}}" width="200"/>
+                                                    @if($user->photo && file_exists($user->photo))
+                                                        <img id="output" class="image-show" src="{{asset($user->photo)}}" width="200"/>
                                                         @else
-                                                        <img id="output" src="{{asset('/public/demo-pic/upload-image.jpg')}}" width="200"/>
+                                                        <img id="output" class="image-show" src="{{asset('/demo-pic/upload-image.jpg')}}" width="200"/>
                                                         @endif
 
                                                 </label></p>

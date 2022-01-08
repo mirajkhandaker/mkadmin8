@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         \App\Providers\AclServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -230,7 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

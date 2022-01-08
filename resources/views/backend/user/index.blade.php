@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="table-responsive">
+                                <div>
                                     <table class="table table-bordered table-hover table-striped" id="dTable">
                                         <thead>
                                         <tr>
@@ -114,8 +114,8 @@
                     'processing': true,
                     'serverSide': true,
                     // 'serverMethod': 'post',
-                    "pageLength": 10,
-                    "lengthMenu": [[5,10, 20,30,40, 50,100, -1], [5,10, 20,30,40, 50,100, "All"]],
+                    "pageLength": 20,
+                    "lengthMenu": [[10, 20,30,40, 50,100, -1], [10, 20,30,40, 50,100, "All"]],
 
                     "bSort" : false,
                     "language": {

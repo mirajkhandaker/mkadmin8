@@ -59,19 +59,17 @@ class SiteSettingController extends Controller
         $setting->copy_right = $request->copy_right ?? Null;
 
         if ($request->hasFile('icon')){
-            if (!empty($setting->icon)){
+            if (!empty($setting->icon) && file_exists($setting->icon)){
                 @unlink($setting->icon);
             }
-            $icon = OwnLibrary::uploadImage($request->icon, "site-setting");
-            $setting->icon = $icon;
+            $setting->icon = OwnLibrary::uploadImage($request->icon, 'site-setting', 500, 500, $quality = 65);
         }
 
         if ($request->hasFile('logo')){
             if (!empty($setting->logo)){
                 @unlink($setting->logo);
             }
-            $logo = OwnLibrary::uploadImage($request->logo, "site-setting");
-            $setting->logo = $logo;
+            $setting->logo = OwnLibrary::uploadImage($request->logo, 'site-setting', 100, '', $quality = 65);
         }
 
         if ($setting->save()){

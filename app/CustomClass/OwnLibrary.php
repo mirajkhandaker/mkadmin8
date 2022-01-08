@@ -1,33 +1,14 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\CustomClass;
 
-
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class OwnLibrary {
 
-    //put your code here
-    public static function numberformat($num = 0){
-        return number_format($num, 2, '.', ',');
-    }
-    
-    public static function printDate($date = '0000-00-00'){
-        return date('F jS, Y', strtotime($date));
-    }
-    
-    public static function printDateTime($dateTime = '0000-00-00 00:00:00'){
-        return date('F jS, Y h:i A', strtotime($dateTime));
-    }
-    
     public static function validateAccess($moduleId = null, $activityId = null) {
         $haystack = Session::get('acl');
 
@@ -39,7 +20,7 @@ class OwnLibrary {
             exit;
         }
     }
-    
+
     public static function in_array_r($needle, $haystack) {
 
         $needleArr = array_keys($needle);
@@ -63,13 +44,19 @@ class OwnLibrary {
         return ($modelObject->currentpage()-1)* $modelObject->perpage() + 1;
     }
 
-    public static function uploadImage($image,$folderName){
-        $image_name = Str::random(20);
-        $ext = strtolower($image->getClientOriginalExtension());
+    public static function uploadImage($image,$folderName,$width=null,$height=null,$quality = 90,$fileName=null,$ext = 'webp'){
+        $image_name = $fileName ?? Str::random(20);
         $image_full_name = $image_name . '.' . $ext;
-        $upload_path = 'public/upload/'.$folderName.'/';
+        $upload_path = 'upload/'.$folderName.'/';
+        if(!File::isDirectory($upload_path)){
+            File::makeDirectory($upload_path, 0777, true, true);
+        }
         $image_url = $upload_path . $image_full_name;
-        $image->move($upload_path, $image_full_name);
+        $img = Image::make($image);
+        $img->encode($ext, $quality)->resize($width, $height,function($constraint)
+        {
+            $constraint->aspectRatio();
+        })->save($image_url);
         return $image_url;
     }
 }

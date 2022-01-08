@@ -33,9 +33,5 @@ class AclServiceProvider extends ServiceProvider
         View::composer('backend.include.left-side-navbar',function ($view){
             $view->with('routeName',\Illuminate\Support\Facades\Route::currentRouteName());
         });
-
-        View::composer('backend.*', function ($view) {
-            $view->with('siteSetting',SiteSetting::find(1));
-        });
     }
 }

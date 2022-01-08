@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\CustomClass\OwnLibrary;
+use App\Models\ModuleToRole;
+use App\Models\ModuleToUser;
 use App\Models\Role;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -37,7 +40,7 @@ class UserController extends Controller
             return DataTables::of($users)
                 ->addColumn('actions', 'backend.user.action')
                 ->rawColumns(['actions'])
-            ->make(true);
+                ->make(true);
         }
 
         return view('backend.user.index');
@@ -84,34 +87,29 @@ class UserController extends Controller
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validation);
-        }else{
-            $user = new User();
-            $user->role_id = $request->role_id;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->contact_no = $request->contact_no;
-            $user->password = Hash::make($request->password);
+        }
+        try {
+            DB::transaction(function () use($request) {
+                $user = new User();
+                $user->role_id = $request->role_id;
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->contact_no = $request->contact_no;
+                $user->password = Hash::make($request->password);
 
-           $image = $request->file('photo');
+                if ($request->file('photo')) {
+                    $user->photo = OwnLibrary::uploadImage($request->file('photo'), 'portfolio-pic', 33.59, 18.89);
+                }
+                $user->save();
 
-            if ($image) {
-                $image_name = Str::random(20);
-                $ext = strtolower($image->getClientOriginalExtension());
-                $image_full_name = $image_name . '.' . $ext;
-                $upload_path = 'public/upload/portfolio-pic/';
-                $image_url = $upload_path . $image_full_name;
-                $image->move($upload_path, $image_full_name);
-                $user->photo = $image_url;
-            }
-
-
-            if ($user->save()){
-                session()->flash("success","User Added");
-                return redirect()->route("user.index");
-            }else{
-                session()->flash("error","User Not Added");
-                return redirect()->back()->withInput();
-            }
+                // Assign Permission
+                $this->assignPermission($request->role_id,$user->id);
+            });
+            session()->flash("success", "User Added");
+            return redirect()->route("user.index");
+        }catch (\Exception $exception){
+            session()->flash("error", "User Not Added\n" . $exception->getMessage());
+            return redirect()->back()->withInput();
         }
     }
 
@@ -172,40 +170,36 @@ class UserController extends Controller
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validation);
-        }else{
-
-            $user->role_id = $request->role_id;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->contact_no = $request->contact_no;
-            $user->status = $request->status;
-            if(!empty($request->password)){
-                $user->password = Hash::make($request->password);
-            }
-
-            $image = $request->file('photo');
-
-            if ($image) {
-                if ($user->photo){
-                    @unlink($user->photo);
+        }
+        try {
+            DB::transaction(function () use ($request,$user) {
+                $currentRole = $user->role_id;
+                $user->role_id = $request->role_id;
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->contact_no = $request->contact_no;
+                $user->status = $request->status;
+                if (!empty($request->password)) {
+                    $user->password = Hash::make($request->password);
                 }
-                $image_name = Str::random(20);
-                $ext = strtolower($image->getClientOriginalExtension());
-                $image_full_name = $image_name . '.' . $ext;
-                $upload_path = 'public/upload/portfolio-pic/';
-                $image_url = $upload_path . $image_full_name;
-                $image->move($upload_path, $image_full_name);
-                $user->photo = $image_url;
-            }
 
+                if ($request->file('photo')) {
+                    if ($user->photo && file_exists($user->photo)) {
+                        @unlink($user->photo);
+                    }
+                    $user->photo = OwnLibrary::uploadImage($request->file('photo'), 'portfolio-pic', 100, 100, $quality = 65);
+                }
 
-            if ($user->save()){
-                session()->flash("success","User Updated");
-                return redirect()->route("user.index");
-            }else{
-                session()->flash("error","User Not Updated");
-                return redirect()->back()->withInput();
-            }
+                $user->save();
+                //Change Permission if role change;
+                if ($user->role_id != $currentRole) $this->assignPermission($request->role_id, $user->id, true);
+
+            });
+            session()->flash("success", "User Updated");
+            return redirect()->route("user.index");
+        }catch (\Exception $exception){
+            session()->flash("error", "User Not Updated.\n".$exception->getMessage());
+            return redirect()->back()->withInput();
         }
     }
 
@@ -218,12 +212,30 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         OwnLibrary::validateAccess($this->moduleId,4);
-        if ($user->delete()){
-            session()->flash('success','User Delated');
-            return redirect()->back();
-        }else{
-            session()->flash('error','User Delated');
-            return redirect()->back();
+        if ($user->delete()) session()->flash('success','User Deleted');
+        else session()->flash('error','User Not Deleted');
+        return redirect()->back();
+    }
+
+    private function assignPermission($roleId,$userId,$isEdit = false){
+
+        // Remove previous role
+        if ($isEdit) ModuleToUser::where('user_id', $userId)->forceDelete();
+
+        $roleActivityList = ModuleToRole::where('role_id', $roleId)->get();
+        $data = array();
+        if (!empty($roleActivityList)) {
+            $i = 0;
+            foreach ($roleActivityList as $rActivity) {
+                $data[$i]['user_id'] = $userId;
+                $data[$i]['module_id'] = $rActivity->module_id;
+                $data[$i]['activity_id'] = $rActivity->activity_id;
+                $i++;
+            }
+        }
+
+        if (!empty($data)) {
+            ModuleToUser::insert($data);
         }
     }
 }

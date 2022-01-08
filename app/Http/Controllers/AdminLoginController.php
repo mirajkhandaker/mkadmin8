@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class AdminLoginController extends Controller
 {
     public function loginView(){
+        if (auth()->check()) return redirect()->route("dashboard");
         return view('backend.login.login');
     }
 

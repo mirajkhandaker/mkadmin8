@@ -32,8 +32,7 @@ $(document).ready(function() {
 // Image Upload
 $(document).ready(function() {
     $('.image').change(function () {
-        var image = document.getElementById('output');
-        image.src = URL.createObjectURL(event.target.files[0]);
+        $(this).closest('.img-parent').find('.image-show').attr('src',URL.createObjectURL(event.target.files[0]));
     });
 });
 

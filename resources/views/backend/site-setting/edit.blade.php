@@ -86,31 +86,31 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 img-parent">
                                             <label>
                                                 Upload Icon (50x50)
                                             </label>
                                             <p><input type="file"  accept="image/*" name="icon" class="image" id="image" style="display: none;"></p>
                                             <p><label for="image" style="cursor: pointer;">
                                                     @if(!$setting->icon)
-                                                        <img id="output" src="{{asset('/public/demo-pic/upload-image.jpg')}}" width="180"/>
+                                                        <img id="output" class="image-show" src="{{asset('/public/demo-pic/upload-image.jpg')}}" width="180"/>
                                                     @else
-                                                        <img id="output" src="{{asset($setting->icon)}}" width="180"/>
+                                                        <img id="output" class="image-show" src="{{asset($setting->icon)}}" width="180"/>
                                                     @endif
                                                 </label></p>
                                             <span class="text-danger"> {{$errors->has("icon") ? $errors->first("icon") : ""}} </span>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 img-parent">
                                             <label>
                                                 Upload Company Logo (128x128)
                                             </label>
                                             <p><input type="file"  accept="image/*" name="logo" class="logo" id="logo" style="display: none;"></p>
                                             <p><label for="logo" style="cursor: pointer;">
                                                     @if(!$setting->logo)
-                                                        <img id="outputLogo" src="{{asset('/public/demo-pic/upload-image.jpg')}}" width="180"/>
+                                                        <img id="outputLogo" class="image-show" src="{{asset('/public/demo-pic/upload-image.jpg')}}" width="180"/>
                                                     @else
-                                                        <img id="outputLogo" src="{{asset($setting->logo)}}" width="180"/>
+                                                        <img id="outputLogo" class="image-show" src="{{asset($setting->logo)}}" width="180"/>
                                                     @endif
                                                 </label></p>
                                             <span class="text-danger"> {{$errors->has("logo") ? $errors->first("logo") : ""}} </span>
